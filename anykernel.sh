@@ -68,6 +68,8 @@ ui_print " ";
 ui_print "You are on $os_string!";
 if [ -f /tmp/anykernel/kernels/$os/Image.gz-dtb ]; then
   mv /tmp/anykernel/kernels/$os/Image.gz-dtb /tmp/anykernel/Image.gz-dtb;
+  mkdir -p /tmp/anykernel/modules/system/lib/modules;
+  mv /tmp/anykernel/kernels/$os/wlan.ko /tmp/anykernel/modules/system/lib/modules/wlan.ko;
 else
   die "There is no kernel for your OS in this zip! Aborting...";
 fi;
