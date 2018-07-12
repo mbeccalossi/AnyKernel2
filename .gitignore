@@ -1,1 +1,3 @@
+*.ko
+Image.gz-dtb
 version
