@@ -125,6 +125,14 @@ if [ $? != "0" ]; then
   abort;
 fi;
 
+if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.cleanupmodules)" == 1 ]; then
+  ui_print " ";
+  ui_print "Removing old modules...";
+  mount -o rw,remount -t auto /system;
+  rm -f /system/lib/modules/*.ko;
+  mount -o ro,remount -t auto /system;
+fi;
+
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.modules)" == 1 ]; then
   ui_print " ";
   ui_print "Pushing modules...";

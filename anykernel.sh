@@ -6,6 +6,7 @@
 properties() { '
 kernel.string=Flash Kernel for the OnePlus 5/T by @nathanchance
 do.devicecheck=1
+do.cleanupmodules=1
 do.modules=1
 do.cleanup=1
 do.cleanuponabort=0
