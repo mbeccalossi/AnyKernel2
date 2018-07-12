@@ -1,7 +1,0 @@
-on boot
-    # bind mount custom wifi module
-    rmmod wlan.ko
-    mount auto /modules/wlan.ko /system/lib/modules/wlan.ko bind
-    mount auto /modules/wlan.ko /vendor/lib/modules/wlan.ko bind
-    exec u:r:modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules wlan
-

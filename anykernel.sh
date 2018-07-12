@@ -84,25 +84,8 @@ insert_line default.prop "ro.sys.fw.bg_apps_limit=60" before "ro.secure=1" "ro.s
 # Import init.flash.rc file
 insert_line init.rc "init.flash.rc" after "import /init.usb.rc" "import /init.flash.rc";
 
-# If on OOS, we need the support to load the Wi-Fi module
+# If on OOS, we need to do some additional cleaning
 if [ "$os" == "oos" ]; then
-  # sepolicy
-  $bin/magiskpolicy --load sepolicy --save sepolicy \
-    "allow init rootfs file execute_no_trans" \
-    "allow { init modprobe } rootfs system module_load" \
-    "allow init { system_file vendor_file vendor_configs_file } file mounton" \
-  ;
-
-  # sepolicy_debug
-  $bin/magiskpolicy --load sepolicy_debug --save sepolicy_debug \
-    "allow init rootfs file execute_no_trans" \
-    "allow { init modprobe } rootfs system module_load" \
-    "allow init { system_file vendor_file vendor_configs_file } file mounton" \
-  ;
-
-  # Patch init.flash.rc to bind mount the Wi-Fi module on OxygenOS
-  prepend_file init.flash.rc "modules" modules;
-
   # Remove recovery service so that TWRP isn't overwritten
   remove_section init.rc "service flash_recovery" ""
 
@@ -119,9 +102,6 @@ if [ "$os" == "oos" ]; then
   remove_section init.oem.debug.rc "service oemlogkit" ""
   remove_section init.oem.debug.rc "service dumpstate_log" ""
   remove_section init.oem.debug.rc "service oemasserttip" ""
-else
-  # Otherwise, just remove it
-  rm -rf $ramdisk/modules
 fi;
 
 # end ramdisk changes
