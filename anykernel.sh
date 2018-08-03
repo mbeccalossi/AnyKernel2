@@ -8,6 +8,7 @@ kernel.string=OpenEngine by kylothow @ xda-developers
 do.devicecheck=1
 do.cleanupmodules=1
 do.modules=1
+do.legacylink=1
 do.cleanup=1
 do.cleanuponabort=0
 device.name1=cheeseburger

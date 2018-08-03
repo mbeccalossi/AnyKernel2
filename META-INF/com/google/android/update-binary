@@ -136,7 +136,8 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.cleanupmodules)" == 1 ]; the
   ui_print " ";
   ui_print "Removing old modules...";
   mount -o rw,remount -t auto /system;
-  rm -f /system/lib/modules/*.ko;
+  rm -rf /system/lib/modules/*;
+  rm -f /system/vendor/lib/modules/*.ko;
   mount -o ro,remount -t auto /system;
 fi;
 
@@ -164,6 +165,12 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.modules)" == 1 ]; then
   cd /tmp/anykernel;
   mount -o ro,remount -t auto /system;
   mount -o ro,remount -t auto /vendor 2>/dev/null;
+fi;
+
+if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.legacylink)" == 1 ]; then
+  mount -o rw,remount -t auto /system;
+  ln -s /system/lib/modules/qca_cld3/qca_cld3_wlan.ko /system/lib/modules/wlan.ko;
+  mount -o ro,remount -t auto /system;
 fi;
 
 debugging;
