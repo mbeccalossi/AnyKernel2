@@ -40,6 +40,9 @@ dump_boot;
 
 # begin ramdisk changes
 
+# init.rc
+insert_line init.rc "init.oek.rc" before "import /init.environ.rc" "import /init.oek.rc";
+
 # end ramdisk changes
 
 write_boot;
