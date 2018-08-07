@@ -31,7 +31,7 @@ ramdisk_compression=auto;
 ## AnyKernel file attributes
 # set permissions/ownership for included ramdisk files
 chmod -R 750 $ramdisk/*;
-chmod -R 755 $ramdisk/sbin;
+find $ramdisk -type f -exec chmod 644 {} \;
 chown -R root:root $ramdisk/*;
 
 
