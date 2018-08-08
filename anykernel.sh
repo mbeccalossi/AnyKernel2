@@ -41,8 +41,12 @@ dump_boot;
 
 # begin ramdisk changes
 
+rm -f $ramdisk/init.oem.early_boot.sh;
+rm -f $ramdisk/init.oem.engineermode.sh;
+
 # init.rc
 insert_line init.rc "init.oek.rc" before "import /init.environ.rc" "import /init.oek.rc";
+remove_section init.rc "service flash_recovery" "";
 
 # end ramdisk changes
 
