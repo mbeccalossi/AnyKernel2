@@ -48,6 +48,22 @@ rm -f $ramdisk/init.oem.engineermode.sh;
 insert_line init.rc "init.oek.rc" before "import /init.environ.rc" "import /init.oek.rc";
 remove_section init.rc "service flash_recovery" "";
 
+# init.oem.rc
+remove_section init.oem.rc "service OPNetlinkService" ""
+remove_section init.oem.rc "service wifisocket" ""
+remove_section init.oem.rc "service oemsysd" ""
+remove_section init.oem.rc "service oem_audio_device" "oneshot"
+remove_section init.oem.rc "service atrace" "seclabel"
+remove_section init.oem.rc "service sniffer_set" ""
+remove_section init.oem.rc "service sniffer_start" ""
+remove_section init.oem.rc "service sniffer_stop" "seclabel"
+remove_section init.oem.rc "service tcpdump-service" ""
+
+# init.oem.debug.rc
+remove_section init.oem.debug.rc "service oemlogkit" ""
+remove_section init.oem.debug.rc "service dumpstate_log" ""
+remove_section init.oem.debug.rc "service oemasserttip" ""
+
 # end ramdisk changes
 
 write_boot;
